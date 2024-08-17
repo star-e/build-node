@@ -1,8 +1,18 @@
 cd %HOMEPATH%
 
 md installed\nodejs\x64-windows\include
-md installed\nodejs\x64-windows\include\deps\uv\include
-md installed\nodejs\x64-windows\include\deps\v8\include
+
+copy node\src\js_native_api.h .\installed\nodejs\x64-windows\include\
+copy node\src\js_native_api_types.h .\installed\nodejs\x64-windows\include\
+copy node\src\node.h .\installed\nodejs\x64-windows\include\
+copy node\src\node_api.h .\installed\nodejs\x64-windows\include\
+copy node\src\node_api_types.h .\installed\nodejs\x64-windows\include\
+copy node\src\node_buffer.h .\installed\nodejs\x64-windows\include\
+copy node\src\node_object_wrap.h .\installed\nodejs\x64-windows\include\
+copy node\src\node_version.h .\installed\nodejs\x64-windows\include\
+
+copy node\deps\uv\include\* .\installed\nodejs\x64-windows\include\
+copy node\deps\v8\include\* .\installed\nodejs\x64-windows\include\
 
 md installed\nodejs\x64-windows\bin
 md installed\nodejs\x64-windows\lib
