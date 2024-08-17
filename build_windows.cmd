@@ -8,5 +8,5 @@ git fetch origin v%VERSION%
 git checkout v%VERSION%
 
 echo build nodejs
-.\vcbuild.bat dll
-.\vcbuild.bat debug dll
+.\vcbuild.bat dll vs2022
+.\vcbuild.bat debug dll vs2022
