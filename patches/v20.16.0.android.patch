@@ -1,5 +1,5 @@
 diff --git a/android_configure.py b/android_configure.py
-index 5cea0393..46def04b 100644
+index 5cea0393..03b4acee 100644
 --- a/android_configure.py
 +++ b/android_configure.py
 @@ -66,12 +66,17 @@ os.environ['PATH'] += os.pathsep + toolchain_path + "/bin"
@@ -20,7 +20,7 @@ index 5cea0393..46def04b 100644
  
  if os.path.exists("./configure"):
 -    os.system("./configure --dest-cpu=" + DEST_CPU + " --dest-os=android --openssl-no-asm --cross-compiling")
-+    os.system("./configure --dest-cpu=" + DEST_CPU + " --dest-os=android --openssl-no-asm --cross-compiling --shared")
++    os.system("./configure --dest-cpu=" + DEST_CPU + " --dest-os=android --openssl-no-asm --cross-compiling --shared --debug")
 diff --git a/deps/v8/src/base/debug/stack_trace_posix.cc b/deps/v8/src/base/debug/stack_trace_posix.cc
 index b76c098d..df689fd2 100644
 --- a/deps/v8/src/base/debug/stack_trace_posix.cc
@@ -34,6 +34,30 @@ index b76c098d..df689fd2 100644
  #define HAVE_EXECINFO_H 1
  #endif
  
+diff --git a/deps/zlib/zlib.gyp b/deps/zlib/zlib.gyp
+index 26ceed9f..83006390 100644
+--- a/deps/zlib/zlib.gyp
++++ b/deps/zlib/zlib.gyp
+@@ -177,11 +177,18 @@
+           'sources': [
+             '<!@pymod_do_main(GN-scraper "<(ZLIB_ROOT)/BUILD.gn" "\\"zlib\\".*?sources = ")',
+           ],
+-          'include_dirs': [ '<(ZLIB_ROOT)' ],
++          # build-node patch: silenced this 'include_dirs', in favor of the next patch below.
++          # 'include_dirs': [ '<(ZLIB_ROOT)' ],
+           'direct_dependent_settings': {
+             'include_dirs': [ '<(ZLIB_ROOT)' ],
+           },
+           'conditions': [
++            # build-node patch: for Android, make available <cpu_features.h> from the NDK:
++            ['OS=="android"', {
++              'include_dirs': [ '<(ZLIB_ROOT)', '<(android_ndk_path)/sources/android/cpufeatures' ],
++            }, {
++              'include_dirs': [ '<(ZLIB_ROOT)' ],
++            }],
+             ['OS!="win"', {
+               'cflags!': [ '-ansi' ],
+               'cflags': [ '-Wno-implicit-fallthrough' ],
 diff --git a/tools/v8_gypfiles/v8.gyp b/tools/v8_gypfiles/v8.gyp
 index 9ffa6e9c..1a642647 100644
 --- a/tools/v8_gypfiles/v8.gyp
