@@ -45,6 +45,10 @@ jobs:
     steps:
       - name: Maximize build space
         uses: easimon/maximize-build-space@master
+        with:
+          root-reserve-mb: 2048
+          remove-dotnet: 'true'
+          remove-haskell: 'true'
       - name: Checkout
         uses: actions/checkout@v4
       - name: Check Free space
