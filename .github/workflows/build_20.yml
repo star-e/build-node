@@ -31,10 +31,6 @@ jobs:
       run: |
         cd %GITHUB_WORKSPACE%
         call .\copy-x64-windows.cmd
-    - name: Rename
-      shell: bash
-      run: |
-        mv installed/nodejs installed/nodejs_20
     - uses: actions/upload-artifact@v4
       with:
         name: nodejs_bin
@@ -69,9 +65,6 @@ jobs:
         run: |
           cd %GITHUB_WORKSPACE%
           sh ./copy_android.sh arm64
-      - name: Rename
-        run: |
-          mv ~/installed/nodejs ~/installed/nodejs_20
       - uses: actions/upload-artifact@v4
         with:
           name: nodejs_bin
@@ -89,7 +82,7 @@ jobs:
 
       - name: Create Release Asset
         run: |
-          cd nodejs_bin/ && tar cvfz ../nodejs_bin_${{env.VERSION}}.tgz nodejs_20 && cd -
+          cd nodejs_bin/ && tar cvfz ../nodejs_bin_${{env.VERSION}}.tgz nodejs && cd -
 
       - name: Create Release
         id: create_release
