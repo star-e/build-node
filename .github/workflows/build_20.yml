@@ -43,7 +43,14 @@ jobs:
   build_android_arm64_shared:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Maximize build space
+        uses: easimon/maximize-build-space@master
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Check Free space
+        run: |
+          echo "Free space:"
+          df -h
       - name: Install NDK
         run: |
           cd ~
