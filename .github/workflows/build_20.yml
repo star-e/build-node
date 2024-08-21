@@ -3,8 +3,8 @@ name: build nodejs v20
 on: 
   workflow_dispatch:
     inputs:
-      tag_date:
-        description: 'tag date'     
+      tag_sdk:
+        description: 'tag sdk'     
         required: true
 
 env:
@@ -86,8 +86,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: NodeJS_${{env.VERSION}}_${{ github.event.inputs.tag_date }}
-          release_name: NodeJS_${{env.VERSION}}_${{ github.event.inputs.tag_date }}
+          tag_name: NodeJS_${{env.VERSION}}_${{ github.event.inputs.tag_sdk }}
+          release_name: NodeJS_${{env.VERSION}}_${{ github.event.inputs.tag_sdk }}
           draft: false
           prerelease: false
 
