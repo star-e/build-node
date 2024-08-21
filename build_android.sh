@@ -1,10 +1,8 @@
 [ -z "$GITHUB_WORKSPACE" ] && GITHUB_WORKSPACE="$( cd "$( dirname "$0" )"/.. && pwd )"
-WORKSPACE=$GITHUB_WORKSPACE
-HOMEPATH=~
 VERSION=$1
 ARCH="$2"
 
-cd $HOMEPATH
+cd $GITHUB_WORKSPACE
 
 git clone https://github.com/nodejs/node.git --branch=v$VERSION --depth=1
 
