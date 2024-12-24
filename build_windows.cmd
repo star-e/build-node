@@ -1,6 +1,5 @@
 set VERSION=%1
-set WORKSPACE=%GITHUB_WORKSPACE%
-cd %HOMEPATH%
+
 git clone https://github.com/nodejs/node.git --branch=v%VERSION% --depth=1
 
 cd node

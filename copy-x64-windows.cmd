@@ -1,5 +1,3 @@
-cd %HOMEPATH%
-
 md installed\nodejs\x64-windows\include
 
 copy node\src\js_native_api.h .\installed\nodejs\x64-windows\include\
